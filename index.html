@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ගා/ශ්‍රී ධීරානන්ද විද්‍යාලය | Official Web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rich-green: #004d26; 
+            --rich-gold: #ffcc00;  
+            --dark-bg: #111;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Noto Sans Sinhala', sans-serif; }
+        body { background-color: #f9f9f9; color: #333; line-height: 1.6; overflow-x: hidden; }
+
+        /* Header */
+        header { 
+            background: var(--white); 
+            padding: 15px 0; 
+            text-align: center; 
+            border-bottom: 6px solid var(--rich-green);
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .logo img { width: 75px; }
+        header h1 { font-size: 1.4rem; color: var(--rich-green); margin-top: 5px; }
+
+        /* Banner */
+        .banner {
+            height: 380px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('IMG-20260325-WA0004.jpg');
+            background-size: cover; background-position: center;
+            display: flex; align-items: center; justify-content: center; color: white; text-align: center;
+        }
+        .banner h2 { font-size: 2.2rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); padding: 0 15px; }
+
+        /* --- NEW RICHMOND STYLE STATS BAR WITH ANIMATION --- */
+        .stats-bar {
+            background: var(--dark-bg);
+            color: white;
+            padding: 60px 10px;
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            text-align: center;
+            overflow: hidden; /* Animation එක එළියට නොපෙනෙන්න */
+        }
+
+        .stat-item {
+            opacity: 0; /* මුලින් නොපෙනී පවතී */
+            transform: translateY(50px); /* මුලින් ටිකක් පහළින් පවතී */
+            transition: all 0.6s ease-out; /* Animation එකේ වේගය */
+        }
+
+        /* JavaScript මගින් මෙම class එක එකතු වූ පසු animation එක ක්‍රියාත්මක වේ */
+        .stat-item.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-item h3 { 
+            font-size: 3rem; 
+            color: var(--rich-gold); 
+            margin-bottom: 5px; 
+            font-weight: 700;
+        }
+        .stat-item p { 
+            font-size: 1rem; 
+            font-weight: bold; 
+            color: #ccc; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        /* -------------------------------------------------- */
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+
+        /* Vision & Mission Cards */
+        .vm-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 50px;
+        }
+        .vm-card {
+            background: #fff; padding: 30px; border-radius: 15px;
+            text-align: center; border-bottom: 6px solid var(--rich-gold);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+        .vm-card h4 { color: #light green; margin-bottom: 15px; font-size: 1.5rem; }
+        .vm-card p { font-weight: 500; font-size: 1.05rem; color: #222; }
+
+        /* Principal Section */
+        .principal-msg {
+            background: var(--white);
+            display: flex; align-items: center;
+            padding: 35px; border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 50px; border-left: 12px solid var(--rich-green);
+        }
+        .p-img img { width: 190px; border-radius: 12px; margin-right: 35px; border: 5px solid #f0f0f0; }
+        .p-text h3 { color: var(--rich-green); font-size: 1.5rem; }
+        .p-text .title { font-weight: bold; color: #888; margin-bottom: 15px; display: block; }
+        .p-text p { font-style: italic; font-size: 1.1rem; }
+
+        /* School Song Section */
+        .school-song {
+            background: var(--rich-green); color: white;
+            padding: 50px 20px; border-radius: 20px; text-align: center; margin-bottom: 50px;
+            box-shadow: 0 15px 35px rgba(0,77,38,0.2);
+        }
+        .song-lyrics { line-height: 2.4; font-size: 1.15rem; }
+        .chorus { font-weight: bold; color: var(--rich-gold); font-size: 1.25rem; margin-bottom: 25px; }
+
+        /* Navigation Box Button */
+        .nav-container { text-align: center; margin-bottom: 60px; }
+        .back-box {
+            display: inline-block; padding: 18px 50px;
+            background: var(--white); color: var(--rich-green);
+            text-decoration: none; font-weight: bold; font-size: 1.3rem;
+            border: 3px solid var(--rich-green); border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: 0.3s ease;
+        }
+        .back-box:hover { background: var(--rich-green); color: white; transform: translateY(-5px); }
+
+        footer { background: #000; color: #777; padding: 40px; text-align: center; }
+        .motto { color: var(--rich-gold); font-size: 1.3rem; font-weight: bold; margin-bottom: 10px; }
+
+        @media (max-width: 768px) {
+            .principal-msg { flex-direction: column; text-align: center; }
+            .p-img img { margin-right: 0; margin-bottom: 20px; width: 100%; max-width: 220px; }
+            .vm-grid { grid-template-columns: 1fr; }
+            .stats-bar { gap: 20px; flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo"><img src="IMG-20260325-WA0003.jpg" alt="Logo"></div>
+    <h1>ගා/ශ්‍රී ධීරානන්ද විද්‍යාලය</h1>
+</header>
+
+<section class="banner">
+    <h2>නැණ පහනින් ලොව දිනන දිරිය දරුවන්</h2>
+</section>
+
+<section class="stats-bar" id="statsSection">
+    <div class="stat-item" style="transition-delay: 0.1s;">
+        <h3>124</h3>
+        <p>මුළු ශිෂ්‍ය සංඛ්‍යාව</p>
+    </div>
+    <div class="stat-item" style="transition-delay: 0.3s;">
+        <h3>18</h3>
+        <p>ගුරු මණ්ඩලය</p>
+    </div>
+    <div class="stat-item" style="transition-delay: 0.5s;">
+        <h3>23</h3>
+        <p>මුළු කාර්ය මණ්ඩලය</p>
+    </div>
+</section>
+
+<div class="container">
+    
+    <div class="vm-grid">
+        <div class="vm-card">
+            <h4>දැක්ම</h4>
+            <p>පිරිපුන් හිසක්, දැමුණු හදක්, හසුරු දෑතක්, සහිත දරුවෙක් සමාජයට දායාද කිරීම.</p>
+        </div>
+        <div class="vm-card">
+            <h4>මෙහෙවර</h4>
+            <p>බුද්ධිමත් චින්තනයක්, විනයානුකූල චර්යාවක්, නායකත්ව කුසලතාවයන් සහිත පෞරුෂයකින් හෙබි මිනිසෙකු බිහි කිරීම සදහා අවශ්‍යවන පරිදි ඉගනුම, ඉගැන්වීම් ක්‍රියාවලිය සංවිධානය කිරීම.</p>
+        </div>
+    </div>
+
+    <div class="principal-msg">
+        <div class="p-img"><img src="IMG-20260326-WA0000.jpg" alt="Principal"></div>
+        <div class="p-text">
+            <h3>කේ.ටී.සී. ආබ්‍රෙව් මහතා</h3>
+            <span class="title">විදුහල්පති</span>
+            <p>"පොත පතින් ලබාගන්නා විෂය දැනුම තවත් අර්ථවත් කර ගැනීමට අමතරව ප්‍රායෝගිකත්වය, ආකල්ප හා ශාරීරික හැකියාවන් සංවර්ධනය කිරීම ද පූර්ණ පෞරුෂයකින් හෙබි දරුවෙකු බිහි කිරීම ද අත්‍යවශ්‍ය වේ."</p>
+        </div>
+    </div>
+
+    <div class="school-song">
+        <h3 style="margin-bottom: 25px; font-size: 1.8rem;">විද්‍යාලයීය ගීතය</h3>
+        <div class="song-lyrics">
+            <div class="chorus">
+                සැරදේ විදුහල් මව ශ්‍රී ධීරා - නන්ද මිහිරි නාමේ <br>
+                තුඩ තුඩ කියවා දිය දද ලෙලවා - පෙරටම يමු මාතා...
+            </div>
+            ඇසුරේ සම-මෙත ලබැඳී - පා සිප් සතරේ රස ඇසඳී <br>
+            යහ ගති ගුණ ඇති සූරු විරූ - දරු කැළ දැඩි කරවන මැණි... <br><br>
+            නැණ පහනින් ලොව එළිය කරන්නට - දිරිය ලබා දෙන විදුහල් මෑණි <br>
+            සිප් සතරින් අප පෝෂණය කර - හෙළ දරුවන් නිසි මග යවමී... <br><br>
+            දැනුමෙන් ගුණයෙන් සන්නද්ධව - ලොව ජය ගන්නට සැරසෙමු අපි <br>
+            ධීරානන්ද විද්‍යාලය දිනේවා - සදාකල් වැජඹේවා...
+        </div>
+    </div>
+
+    <div class="nav-container">
+        <a href="sports.html" class="back-box">🏆 Sports Meet 2026 </a>
+    </div>
+
+</div>
+
+<footer>
+    <p class="motto">"ආලෝකෝ උදපාදී"</p>
+    <p>ගා/ශ්‍රී ධීරානන්ද විද්‍යාලය - බුස්ස, ගාල්ල</p>
+</footer>
+
+<script>
+    // පිටුව load වූ පසු හෝ scroll කරද්දී stats පෙනෙන විට animation එක ක්‍රියාත්මක කිරීම
+    const statsSection = document.getElementById('statsSection');
+    const statItems = document.querySelectorAll('.stat-item');
+
+    // Intersection Observer එකක් මගින් statsSection එක තිරයට පෙනෙනවාදැයි පරීක්ෂා කිරීම
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // තිරයට පෙනෙන විට එක් එක් stat item එකට 'appear' class එක එකතු කිරීම
+                statItems.forEach(item => {
+                    item.classList.add('appear');
+                });
+                // animation එක එක පාරක් පමණක් ක්‍රියාත්මක වීමට observer එක නවත්වන්න
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.5 // 50% ක් පෙනෙන විට ක්‍රියාත්මක වේ
+    });
+
+    observer.observe(statsSection);
+</script>
+</body>
+</html>
